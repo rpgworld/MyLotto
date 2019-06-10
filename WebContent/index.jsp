@@ -146,9 +146,7 @@ $('document').ready(function(){
 
 	// 해당 회차 번호 가져오기
 	$('#getNumber').click(function(){
-		// 글자 색 초기화
-		$('input[type=\'text\']').css('color', 'black'); 
-		
+		fontReset();
 		var count = $('#count').val();
 		$.ajax({
 			type: 'GET',
@@ -174,16 +172,12 @@ $('document').ready(function(){
 	});
 	// 초기화
 	$('#resetAll').click(function(){
-		// 글자 색 초기화
-		$('input[type=\'text\']').css('color', 'black'); 
-		
+		fontReset();
 		$('input[type=\'text\']').val('');
 	});
 	// 로또 번호 등수 확인
 	$('#gogo').click(function(){
-		// 글자 색 초기화
-		$('input[type=\'text\']').css('color', 'black'); 
-		
+		fontReset();
 		var count = $('#count').val();
 		
 		var inputNumber = new Array();
@@ -314,6 +308,10 @@ $('document').ready(function(){
 		$('input[type=\'text\']').css('color', 'black'); 
 	});
 });
+function fontReset() {
+	// 글자 색 초기화
+	$('input[type=\'text\']').css('color', 'black'); 
+}
 </script>
 </head>
 <body>
