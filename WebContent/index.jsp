@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maxmun-scale=1, minimun-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximun-scale=1, minimun-scale=1, user-scalable=no">
 <title>Lotto World</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
@@ -146,6 +146,9 @@ $('document').ready(function(){
 
 	// 해당 회차 번호 가져오기
 	$('#getNumber').click(function(){
+		// 글자 색 초기화
+		$('input[type=\'text\']').css('color', 'black'); 
+		
 		var count = $('#count').val();
 		$.ajax({
 			type: 'GET',
@@ -171,10 +174,16 @@ $('document').ready(function(){
 	});
 	// 초기화
 	$('#resetAll').click(function(){
+		// 글자 색 초기화
+		$('input[type=\'text\']').css('color', 'black'); 
+		
 		$('input[type=\'text\']').val('');
 	});
 	// 로또 번호 등수 확인
 	$('#gogo').click(function(){
+		// 글자 색 초기화
+		$('input[type=\'text\']').css('color', 'black'); 
+		
 		var count = $('#count').val();
 		
 		var inputNumber = new Array();
@@ -204,37 +213,40 @@ $('document').ready(function(){
 			$('#myModal').modal();
 			return;
 		} 
-		// 번호 빈칸 확인
-		for(var i = 0; i < 6; i++) {
-			if(inputNumber[i] == "") {
-				$('#myModalLabel').html('경고창');
-				$('.modal-body').html('번호를 입력하세오.');
-				$('#myModal').modal();
-				return;
-			}
-		}
-		// 1 ~ 45 의 숫자만 입력하도록
+		// 1 ~ 45 의 숫자만 입력하도록 처리
+		//  : 잘못 입력된 input 박스 글자 색깔 빨간색으로 변경
+		var pcnt = 0;
 		for(var i = 0; i < 6; i++) {
 			//alert(typeof inputNumber[i] + ' ' + inputNumber[i]);
 			if(inputNumber[i] < 1 || inputNumber[i] > 45 || isNaN(inputNumber[i])) {
-				$('#myModalLabel').html('경고창');
-				$('.modal-body').html('1 ~ 45 의 숫자를 입력하세요.');
-				$('#myModal').modal();
-				return;
+				$('#number' + (i + 1)).css('color', 'red');
+				pcnt++;
 			}
 		}
+		if(pcnt > 0) {
+			$('#myModalLabel').html('경고창');
+			$('.modal-body').html('1 ~ 45 의 숫자를 입력하세요.');
+			$('#myModal').modal();
+			return;
+		}
 		// 번호 중복이 없도록
+		pcnt = 0;
 		for (var i = 0; i < 6; i++) {
         	for (var j = 0; j < 6; j++) {
         		if (inputNumber[i] == inputNumber[j]) {
         			if(i == j) continue;
-        			$('#myModalLabel').html('경고창');
-					$('.modal-body').html('중복된 번호가 있습니다.');
-					$('#myModal').modal();
-					return;
+        			$('#number' + (i + 1)).css('color', 'red');
+        			$('#number' + (j + 1)).css('color', 'red');
+        			pcnt++;
         		}
         	}
         }
+		if(pcnt > 0) {
+			$('#myModalLabel').html('경고창');
+			$('.modal-body').html('중복된 번호가 있습니다.');
+			$('#myModal').modal();
+			return;
+		}
 		
 		$.ajax({
 			type: 'GET',
@@ -296,6 +308,10 @@ $('document').ready(function(){
 		        alert(status);
 		    }
 		});
+	});
+	// input 박스 onkeyup 이벤트 : 글자색 초기화
+	$('input[type=\'text\']').focus(function(){
+		$('input[type=\'text\']').css('color', 'black'); 
 	});
 });
 </script>
