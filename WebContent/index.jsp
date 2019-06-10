@@ -133,8 +133,8 @@ $('document').ready(function(){
 	    	var num6 = result.drwtNo6;
 	    	var bnum = result.bnusNo;
 	    	$('#header #info').append('최신 회차 : ' + result.drwNo + '회차 <br> 날짜 : ' + result.drwNoDate + '<br>');
-	    	$('#header #info').append('당첨 번호 : ' + num1 + ' ' + num2 + ' ' + num3 + ' ' + num4 + ' ' 
-	    			+ num5 + ' ' + num6 + ' + ' + bnum);
+	    	$('#header #info').append('당첨 번호 : ' 
+	    			+ num1 + ' ' + num2 + ' ' + num3 + ' ' + num4 + ' ' + num5 + ' ' + num6 + ' + ' + bnum);
 	        
 	    },
 	    error: function (request,status, error) {
@@ -215,7 +215,8 @@ $('document').ready(function(){
 		}
 		// 1 ~ 45 의 숫자만 입력하도록
 		for(var i = 0; i < 6; i++) {
-			if(inputNumber[i] < 1 || inputNumber[i] > 45 || inputNumber[i] != 'NaN') {
+			//alert(typeof inputNumber[i] + ' ' + inputNumber[i]);
+			if(inputNumber[i] < 1 || inputNumber[i] > 45 || isNaN(inputNumber[i])) {
 				$('#myModalLabel').html('경고창');
 				$('.modal-body').html('1 ~ 45 의 숫자를 입력하세요.');
 				$('#myModal').modal();
@@ -307,8 +308,8 @@ $('document').ready(function(){
 		<hr class="my-4">
 		<p id="info"> 참고사항 <br/>
 		    1. 해당 회차를 입력하고 번호 가져올 수 있습니다.<br/>
-		    2. 입력한 번호로 해당회차와 비교하여 1등 2등... 확인 가능 합니다. <br/>
-		    3. 최신회차 정보가 아래에 자동 업데이트 됩니다.<br/><br/>
+		    2. 입력한 번호(1 ~ 45의 숫자)로 해당 회차와 비교하여 1등 2등... 확인 가능 합니다.<br/>
+		    3. 최신 회차 정보가 아래에 자동 업데이트 됩니다.<br/><br/>
 		</p>
 	</header>
 	<section id="content_section">
