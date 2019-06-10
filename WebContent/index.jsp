@@ -179,12 +179,12 @@ $('document').ready(function(){
 		
 		var inputNumber = new Array();
 		
-		inputNumber[0] = $('#number1').val();
-    	inputNumber[1] = $('#number2').val();
-    	inputNumber[2] = $('#number3').val();
-    	inputNumber[3] = $('#number4').val();
-    	inputNumber[4] = $('#number5').val();
-    	inputNumber[5] = $('#number6').val();
+		inputNumber[0] = parseInt($('#number1').val());
+    	inputNumber[1] = parseInt($('#number2').val());
+    	inputNumber[2] = parseInt($('#number3').val());
+    	inputNumber[3] = parseInt($('#number4').val());
+    	inputNumber[4] = parseInt($('#number5').val());
+    	inputNumber[5] = parseInt($('#number6').val());
     	
     	// 입력한 로또번호 오름차순
     	for(var i = 0; i < 6; i++) {
@@ -213,9 +213,9 @@ $('document').ready(function(){
 				return;
 			}
 		}
-		// 1 ~ 45 의 숫자
+		// 1 ~ 45 의 숫자만 입력하도록
 		for(var i = 0; i < 6; i++) {
-			if(inputNumber[i] < 1 || inputNumber[i] > 45) {
+			if(inputNumber[i] < 1 || inputNumber[i] > 45 || inputNumber[i] != 'NaN') {
 				$('#myModalLabel').html('경고창');
 				$('.modal-body').html('1 ~ 45 의 숫자를 입력하세요.');
 				$('#myModal').modal();
